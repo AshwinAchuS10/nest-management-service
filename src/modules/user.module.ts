@@ -6,6 +6,7 @@ import { ConfigService } from '../config/config.service';
 import { TypeormConfigService } from '../config/typeorm-config.service';
 import { UserService } from '../services/user.service';
 import { UserController } from '../controllers/user.controller';
+import { TypeOrmHealthIndicator } from '@nestjs/terminus';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UserController } from '../controllers/user.controller';
   controllers: [UserController],
   providers: [
     UserService,
+    TypeOrmHealthIndicator,
     ConfigService,
     {
       provide: 'MAILER_SERVICE',
