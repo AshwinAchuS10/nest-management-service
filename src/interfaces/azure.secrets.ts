@@ -8,5 +8,5 @@ export interface IDatabase {
     port: number;
     username: string;
     password: string;
-    database: string;
+    name: string;
 }
