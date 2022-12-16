@@ -1,7 +1,7 @@
 import { HttpStatus, Inject } from '@nestjs/common';
 import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 
-import { HealthIndicatorResult, TypeOrmHealthIndicator } from '@nestjs/terminus';
+import { HealthIndicatorResult, MongooseHealthIndicator } from '@nestjs/terminus';
 import { firstValueFrom } from 'rxjs';
 import { USER_CREATE_FAILED, USER_CREATE_SUCCESS } from '../constants/user.messages';
 import { IUserCreateResponse } from '../interfaces/user-create-response.interface';
@@ -10,7 +10,7 @@ import { UserService } from '../services/user.service';
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    private db: TypeOrmHealthIndicator,
+    private db: MongooseHealthIndicator,
     @Inject('MAILER_SERVICE') private readonly mailerServiceClient: ClientProxy,
   ) { }
 
