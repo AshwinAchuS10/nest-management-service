@@ -22,8 +22,8 @@ import { TypeOrmHealthIndicator } from '@nestjs/terminus';
     ConfigService,
     {
       provide: 'MAILER_SERVICE',
-      useFactory: (configService: ConfigService) => {
-        const mailerServiceOptions = configService.get('mailerService');
+      useFactory: async (configService: ConfigService) => {
+        const mailerServiceOptions = await configService.get('mailerService');
         return ClientProxyFactory.create(mailerServiceOptions);
       },
       inject: [ConfigService],

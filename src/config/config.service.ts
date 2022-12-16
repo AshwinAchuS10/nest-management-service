@@ -1,4 +1,6 @@
 import { Transport } from '@nestjs/microservices';
+import { IAzureUserSecrets } from 'src/interfaces/azure.secrets';
+import { AzureVault } from '../libs/azure.vault';
 
 export class ConfigService {
   private readonly envConfig: { [key: string]: any } = null;
@@ -18,7 +20,13 @@ export class ConfigService {
     };
   }
 
-  get(key: string): any {
+  get(key: string): Promise<any> {
     return this.envConfig[key];
+  }
+
+  async getSecrets(): Promise<any> {
+    const secrets: IAzureUserSecrets = await AzureVault.getKeyVaultSecret(true);
+    this.envConfig.secrets = secrets;
+    return this.envConfig.secrets;
   }
 }

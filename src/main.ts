@@ -6,13 +6,14 @@ import { ValidationPipe } from '@nestjs/common';
 import { RpcExceptionFilter } from './middlewares/rpc.exception';
 
 async function bootstrap() {
+  let configService = new ConfigService();
   const app = await NestFactory.createMicroservice(UserModule, {
     transport: Transport.TCP,
     options: {
-      host: new ConfigService().get('host'),
-      port: new ConfigService().get('port'),
+      host: configService.get('host'),
+      port: configService.get('port'),
     },
-  } as TcpOptions);
+  } as unknown as TcpOptions);
 
   app.useGlobalPipes(new ValidationPipe({
     transform: true
