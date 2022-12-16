@@ -4,7 +4,6 @@ import { ClientProxy, MessagePattern } from '@nestjs/microservices';
 import { HealthIndicatorResult, TypeOrmHealthIndicator } from '@nestjs/terminus';
 import { firstValueFrom } from 'rxjs';
 import { USER_CREATE_FAILED, USER_CREATE_SUCCESS } from '../constants/user.messages';
-import { User } from '../entities/user.entity';
 import { IUserCreateResponse } from '../interfaces/user-create-response.interface';
 import { UserService } from '../services/user.service';
 
@@ -30,7 +29,7 @@ export class UserController {
   }
 
   @MessagePattern('user_create')
-  public async createUser(userRequest: User): Promise<IUserCreateResponse> {
+  public async createUser(userRequest: any): Promise<IUserCreateResponse> {
     let result: IUserCreateResponse;
     try {
       const user = await this.userService.createUser(userRequest);

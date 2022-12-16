@@ -1,24 +1,30 @@
 import { Module } from '@nestjs/common';
 import { ClientProxyFactory } from '@nestjs/microservices';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../entities/user.entity';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MongooseHealthIndicator } from '@nestjs/terminus';
 import { ConfigService } from '../config/config.service';
-import { TypeormConfigService } from '../config/typeorm-config.service';
-import { UserService } from '../services/user.service';
+import { MongooseConfigService } from '../config/mongoose-config.service';
 import { UserController } from '../controllers/user.controller';
-import { TypeOrmHealthIndicator } from '@nestjs/terminus';
+import { UserSchema } from '../entities/user.entity';
+import { UserService } from '../services/user.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forRootAsync({
-      useClass: TypeormConfigService
+    MongooseModule.forRootAsync({
+      useClass: MongooseConfigService
     }),
-    TypeOrmModule.forFeature([User]),
+    MongooseModule.forFeature([
+      {
+        name: 'User',
+        schema: UserSchema,
+        collection: 'users',
+      },
+    ]),
   ],
   controllers: [UserController],
   providers: [
     UserService,
-    TypeOrmHealthIndicator,
+    MongooseHealthIndicator,
     ConfigService,
     {
       provide: 'MAILER_SERVICE',
