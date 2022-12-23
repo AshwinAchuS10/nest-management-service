@@ -1,12 +1,11 @@
 export interface IAzureUserSecrets {
-    database: IDatabase;
+  database: IDatabase;
 }
 
-
 export interface IDatabase {
-    host: string;
-    port: number;
-    username: string;
-    password: string;
-    name: string;
+  host: string;
+  port: number;
+  username: string;
+  password: string;
+  name: string;
 }

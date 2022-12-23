@@ -4,23 +4,21 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongooseConfigService } from 'configuration/mongoose-config.service';
 
+const infrastructure: Provider[] = [];
 
-const infrastructure: Provider[] = [
-];
-
-const application: Array<any> = [
-];
+const application: Array<any> = [];
 
 const domain: Array<any> = [];
 
 @Module({
-  imports: [CqrsModule, MongooseModule.forRootAsync({
-    useClass: MongooseConfigService,
-  }),
-    MongooseModule.forFeature([
-    ])],
+  imports: [
+    CqrsModule,
+    MongooseModule.forRootAsync({
+      useClass: MongooseConfigService,
+    }),
+    MongooseModule.forFeature([]),
+  ],
   controllers: [],
   providers: [Logger, ...infrastructure, ...application, ...domain],
 })
-export class ProductModule {
-}
+export class ProductModule {}

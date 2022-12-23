@@ -17,7 +17,7 @@ export const CategorySchema = new mongoose.Schema<ICategorySchema>(
   {
     name: {
       type: String,
-      required: [true, 'Name can not be empty']
+      required: [true, 'Name can not be empty'],
     },
     description: {
       type: String,
@@ -26,12 +26,15 @@ export const CategorySchema = new mongoose.Schema<ICategorySchema>(
       required: [true, 'Status can not be empty'],
       type: String,
     },
-    tags: [{
-      type: String,
-    }],
+    tags: [
+      {
+        type: String,
+      },
+    ],
     ownerId: {
       required: [true, 'Owner can not be empty'],
-      type: Schema.Types.ObjectId, ref: 'User'
+      type: Schema.Types.ObjectId,
+      ref: 'User',
     },
   },
   {
@@ -45,6 +48,6 @@ export const CategorySchema = new mongoose.Schema<ICategorySchema>(
       versionKey: false,
       transform: transformValue,
     },
-    timestamps: true
+    timestamps: true,
   }
 );

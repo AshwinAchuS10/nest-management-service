@@ -12,7 +12,6 @@ import { CategoryQueryImplement } from 'infrastructure/category/query/category.q
 import { CategoryRepositoryImplement } from 'infrastructure/category/repository/category.repository.implement';
 import { CategorySchema } from 'infrastructure/category/entity/category.entity';
 
-
 const infrastructure: Provider[] = [
   {
     provide: InjectionToken.CATEGORY_REPOSITORY,
@@ -24,25 +23,24 @@ const infrastructure: Provider[] = [
   },
 ];
 
-const application = [
-  CreateCategoryHandler,
-  FindCategoryHandler,
-];
+const application = [CreateCategoryHandler, FindCategoryHandler];
 
 const domain = [CategoryFactory];
 
 @Module({
-  imports: [CqrsModule, MongooseModule.forRootAsync({
-    useClass: MongooseConfigService,
-  }),
+  imports: [
+    CqrsModule,
+    MongooseModule.forRootAsync({
+      useClass: MongooseConfigService,
+    }),
     MongooseModule.forFeature([
       {
         name: 'Category',
         schema: CategorySchema,
       },
-    ])],
+    ]),
+  ],
   controllers: [CategorysController],
   providers: [Logger, ...infrastructure, ...application, ...domain],
 })
-export class CategoryModule {
-}
+export class CategoryModule {}

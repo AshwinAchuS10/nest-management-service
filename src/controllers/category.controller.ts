@@ -1,6 +1,4 @@
-import {
-  Body, Controller, HttpStatus, Param
-} from '@nestjs/common';
+import { Body, Controller, HttpStatus, Param } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 import { MessagePattern } from '@nestjs/microservices';
@@ -12,16 +10,14 @@ import { ICategoryResponse } from 'domain/category/response/category.response';
 
 @Controller()
 export class CategorysController {
-  constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) { }
+  constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) {}
 
   @MessagePattern('category_create')
   async createCategory(@Body() body: CreateCategory): Promise<ICategoryResponse> {
     console.log('body: ', body);
     let result;
     try {
-      const command = new CreateCategoryCommand(
-        body.name, body.description, body.status, body.ownerId, body.tags,
-      );
+      const command = new CreateCategoryCommand(body.name, body.description, body.status, body.ownerId, body.tags);
       let category = await this.commandBus.execute(command);
       result = {
         status: HttpStatus.CREATED,
@@ -38,15 +34,11 @@ export class CategorysController {
         errors: [error?.message],
       };
       throw error;
-
     }
   }
 
   @MessagePattern('category_get_by_id')
-  async findCategoryById(
-    @Body() body: any
-  ): Promise<ICategoryResponse> {
-
+  async findCategoryById(@Body() body: any): Promise<ICategoryResponse> {
     let result;
     try {
       let category = await this.queryBus.execute(new FindCategoryQuery(body._id));

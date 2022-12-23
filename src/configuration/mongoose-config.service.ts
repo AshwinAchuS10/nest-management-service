@@ -12,6 +12,6 @@ export class MongooseConfigService implements MongooseOptionsFactory {
       // should be normalised connection url with creds attached
       uri: `mongodb://${secrets.database.username}:${secrets.database.password}@${secrets.database.host}/${secrets.database.name}`,
       // uri: `mongodb://${secrets.database.host}/${secrets.database.name}`
-    }
+    };
   }
 }

@@ -6,6 +6,6 @@ export class CreateCategoryCommand implements ICommand {
     readonly description: string,
     readonly status: string,
     readonly ownerId: string,
-    readonly tags: Array<string>,
-  ) { }
+    readonly tags: Array<string>
+  ) {}
 }

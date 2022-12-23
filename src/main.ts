@@ -8,7 +8,6 @@ import { RpcExceptionFilter } from './middlewares/rpc.exception';
 import { ManagementServiceModule } from './modules/management.service.module';
 
 async function bootstrap() {
-
   let configService = new ConfigService();
   const app = await NestFactory.createMicroservice(ManagementServiceModule, {
     transport: Transport.TCP,
@@ -19,9 +18,11 @@ async function bootstrap() {
     },
   } as unknown as TcpOptions);
 
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true
-  }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    })
+  );
 
   app.useGlobalFilters(new RpcExceptionFilter());
   await app.listen();

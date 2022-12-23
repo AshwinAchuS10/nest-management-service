@@ -1,8 +1,4 @@
-import {
-  Inject,
-  InternalServerErrorException,
-  NotFoundException
-} from '@nestjs/common';
+import { Inject, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 
 import { InjectionToken } from '../injection.token';
@@ -11,9 +7,7 @@ import { FindCategoryQuery } from './find.category.query';
 import { FindCategoryResult } from './find.category.result';
 
 @QueryHandler(FindCategoryQuery)
-export class FindCategoryHandler
-  implements IQueryHandler<FindCategoryQuery, FindCategoryResult>
-{
+export class FindCategoryHandler implements IQueryHandler<FindCategoryQuery, FindCategoryResult> {
   @Inject(InjectionToken.CATEGORY_QUERY) readonly categoryQuery: CategoryQuery;
 
   async execute(query: FindCategoryQuery): Promise<FindCategoryResult> {
@@ -23,11 +17,9 @@ export class FindCategoryHandler
     const dataKeys = Object.keys(data);
     const resultKeys = Object.keys(new FindCategoryResult());
 
-    if (dataKeys.length < resultKeys.length)
-      throw new InternalServerErrorException();
+    if (dataKeys.length < resultKeys.length) throw new InternalServerErrorException();
 
-    if (resultKeys.find((resultKey) => !dataKeys.includes(resultKey)))
-      throw new InternalServerErrorException();
+    if (resultKeys.find(resultKey => !dataKeys.includes(resultKey))) throw new InternalServerErrorException();
 
     return data;
   }

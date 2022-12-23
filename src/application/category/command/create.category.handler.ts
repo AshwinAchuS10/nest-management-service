@@ -7,9 +7,7 @@ import { CategoryFactory } from 'domain/category/category.factory';
 import { CategoryRepository } from 'domain/category/category.repository';
 
 @CommandHandler(CreateCategoryCommand)
-export class CreateCategoryHandler
-  implements ICommandHandler<CreateCategoryCommand, void>
-{
+export class CreateCategoryHandler implements ICommandHandler<CreateCategoryCommand, void> {
   @Inject(InjectionToken.CATEGORY_REPOSITORY)
   private readonly accountRepository: CategoryRepository;
   @Inject() private readonly categoryFactory: CategoryFactory;
