@@ -8,6 +8,7 @@ import { RpcExceptionFilter } from './middlewares/rpc.exception';
 import { ManagementServiceModule } from './modules/management.service.module';
 
 async function bootstrap() {
+
   let configService = new ConfigService();
   const app = await NestFactory.createMicroservice(ManagementServiceModule, {
     transport: Transport.TCP,

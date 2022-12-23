@@ -9,7 +9,9 @@ export class MongooseConfigService implements MongooseOptionsFactory {
     let secrets: IAzureUserSecrets = await new ConfigService().getSecrets();
     console.log('secrets: ', secrets);
     return {
+      // should be normalised connection url with creds attached
       uri: `mongodb://${secrets.database.username}:${secrets.database.password}@${secrets.database.host}/${secrets.database.name}`,
+      // uri: `mongodb://${secrets.database.host}/${secrets.database.name}`
     }
   }
 }
