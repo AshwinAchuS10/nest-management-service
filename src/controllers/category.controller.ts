@@ -16,10 +16,11 @@ export class CategorysController {
 
   @MessagePattern('category_create')
   async createCategory(@Body() body: CreateCategory): Promise<ICategoryResponse> {
+    console.log('body: ', body);
     let result;
     try {
       const command = new CreateCategoryCommand(
-        body.name,
+        body.name, body.description, body.status, body.ownerId, body.tags,
       );
       let category = await this.commandBus.execute(command);
       result = {

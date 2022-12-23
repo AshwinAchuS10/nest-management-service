@@ -3,11 +3,15 @@ import { AggregateRoot } from '@nestjs/cqrs';
 export type CategoryEssentialProperties = Readonly<
   Required<{
     name: string;
+    status: string;
+    ownerId: string;
   }>
 >;
 
 export type CategoryOptionalProperties = Readonly<
   Partial<{
+    tags: Array<string>
+    description: string;
   }>
 >;
 
@@ -19,7 +23,6 @@ export interface Category {
 }
 
 export class CategoryImplement extends AggregateRoot implements Category {
-  private readonly name: string;
 
   constructor(properties: CategoryProperties) {
     super();

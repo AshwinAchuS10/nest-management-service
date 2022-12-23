@@ -17,7 +17,11 @@ export class CreateCategoryHandler
   async execute(command: CreateCategoryCommand): Promise<any> {
     const category = this.categoryFactory.create({
       ...command,
-      name: command?.name,
+      name: command.name,
+      description: command.description,
+      status: command.status,
+      tags: command.tags,
+      ownerId: command.ownerId,
     });
 
     await this.accountRepository.save(category);

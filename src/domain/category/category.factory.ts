@@ -4,6 +4,10 @@ import { Category, CategoryImplement, CategoryProperties } from 'domain/category
 
 type CreateCategoryOptions = Readonly<{
     name: string;
+    description: string;
+    status: string;
+    tags: Array<string>;
+    ownerId: string;
 }>;
 
 export class CategoryFactory {
