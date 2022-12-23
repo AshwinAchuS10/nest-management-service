@@ -1,14 +1,14 @@
 import { Transport } from '@nestjs/microservices';
-import { IAzureUserSecrets } from 'src/interfaces/azure.secrets';
-import { AzureVault } from '../libs/azure.vault';
+import { IAzureUserSecrets } from 'domain/common/azure.secrets';
+import { AzureVault } from '../libraries/azure.vault';
 
 export class ConfigService {
-  private readonly envConfig: { [key: string]: any } = null;
+  private readonly envConfig: { [key: string]: any } = {};
 
   constructor() {
     this.envConfig = {
-      port: process.env.USER_SERVICE_PORT,
-      host: process.env.USER_SERVICE_HOST,
+      port: process.env.MANAGEMENT_SERVICE_PORT,
+      host: process.env.MANAGEMENT_SERVICE_HOST,
     };
     this.envConfig.gatewayPort = process.env.API_GATEWAY_PORT;
     this.envConfig.mailerService = {
