@@ -11,7 +11,7 @@ import { CategoryResponse } from 'domain/category/response/category.response';
 @ApiTags('categories')
 @Controller('categories')
 export class CategorysController {
-  constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) { }
+  constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) {}
 
   @Post('/')
   @ApiCreatedResponse({

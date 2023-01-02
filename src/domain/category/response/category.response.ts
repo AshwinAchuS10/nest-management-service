@@ -9,14 +9,12 @@ export class CategoryResponse {
   status: number;
 
   @ApiProperty({
-    type: Category
+    type: Category,
   })
   data: {
-    category: Category
+    category: Category;
   } | null;
 
   @ApiProperty({ nullable: true })
   errors?: Array<any> | null;
 }
-
-
