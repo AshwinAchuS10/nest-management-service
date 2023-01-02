@@ -5,11 +5,10 @@ import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from 'configuration/config.service';
+import logger from 'configuration/logger.service';
 import { LoggingInterceptor } from 'middlewares/logging.interceptor';
 import { ValidationPipe } from 'middlewares/validation.pipe';
 import { ManagementServiceModule } from 'modules/management.service.module';
-import bunyan from 'bunyan';
-import logger from 'configuration/logger.service';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(ManagementServiceModule, new FastifyAdapter());

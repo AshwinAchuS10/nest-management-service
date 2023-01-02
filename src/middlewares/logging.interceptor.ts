@@ -1,7 +1,7 @@
-import { CallHandler, ExecutionContext, Logger, NestInterceptor } from '@nestjs/common';
+import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
+import logger from 'configuration/logger.service';
 import { Request, Response } from 'express';
 import { map, Observable } from 'rxjs';
-import logger from 'configuration/logger.service';
 
 export class LoggingInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler<object>): Observable<object> | Promise<Observable<object>> {

@@ -4,10 +4,10 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCategoryCommand } from 'application/category/command/create.category.command';
 import { FindCategoryQuery } from 'application/category/query/find.category.query';
+import logger from 'configuration/logger.service';
 import { CATEGORY_CREATE_FAILED, CATEGORY_CREATE_SUCCESS, CATEGORY_GET_FAILED, CATEGORY_GET_SUCCESS } from 'constants/category.messages';
 import { Category } from 'domain/category/request/category.request';
 import { CategoryResponse } from 'domain/category/response/category.response';
-import logger from 'configuration/logger.service';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -20,7 +20,7 @@ export class CategorysController {
   })
   async createCategory(@Body() body: Category): Promise<CategoryResponse> {
     let result;
-    logger.log.trace('Omg');
+    logger.log.trace('In Category Controller');
     try {
       const command = new CreateCategoryCommand(body.name, body.description, body.status, body.ownerId, body.tags);
       let category: Category = await this.commandBus.execute(command);
