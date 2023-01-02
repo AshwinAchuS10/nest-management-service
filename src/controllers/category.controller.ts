@@ -7,6 +7,7 @@ import { FindCategoryQuery } from 'application/category/query/find.category.quer
 import { CATEGORY_CREATE_FAILED, CATEGORY_CREATE_SUCCESS, CATEGORY_GET_FAILED, CATEGORY_GET_SUCCESS } from 'constants/category.messages';
 import { Category } from 'domain/category/request/category.request';
 import { CategoryResponse } from 'domain/category/response/category.response';
+import logger from 'configuration/logger.service';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -18,8 +19,8 @@ export class CategorysController {
     type: CategoryResponse,
   })
   async createCategory(@Body() body: Category): Promise<CategoryResponse> {
-    console.log('body: ', body);
     let result;
+    logger.log.trace('Omg');
     try {
       const command = new CreateCategoryCommand(body.name, body.description, body.status, body.ownerId, body.tags);
       let category: Category = await this.commandBus.execute(command);

@@ -7,4 +7,4 @@ import { HealthModule } from 'modules/health.module';
   imports: [CategoryModule, ProductModule, HealthModule],
   exports: [CategoryModule, ProductModule, HealthModule],
 })
-export class ManagementServiceModule { }
+export class ManagementServiceModule {}

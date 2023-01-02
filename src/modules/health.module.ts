@@ -23,4 +23,4 @@ const domain: Array<any> = [];
   controllers: [HealthController],
   providers: [MongooseHealthIndicator, Logger, ...infrastructure, ...application, ...domain],
 })
-export class HealthModule { }
+export class HealthModule {}
