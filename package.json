@@ -21,7 +21,7 @@
     "libraries": "build/src/libraries",
     "interfaces": "build/src/interfaces",
     "interface": "build/src/interface",
-    "middleware": "build/src/middleware",
+    "middlewares": "build/src/middlewares",
     "constants": "build/src/constants",
     "src": "build/src"
   },

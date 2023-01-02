@@ -1,7 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
-import { MessagePattern } from '@nestjs/microservices';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateCategoryCommand } from 'application/category/command/create.category.command';
 import { FindCategoryQuery } from 'application/category/query/find.category.query';

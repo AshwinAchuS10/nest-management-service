@@ -58,8 +58,8 @@
       "resources/*": [
         "./src/resources/*"
       ],
-      "middleware/*": [
-        "./src/middleware/*"
+      "middlewares/*": [
+        "./src/middlewares/*"
       ],
     },
     "typeRoots": [
