@@ -4,7 +4,7 @@ import { ProductModule } from 'modules/product.module';
 import { HealthModule } from 'modules/health.module';
 
 @Module({
-  imports: [CategoryModule, ProductModule, HealthModule],
-  exports: [CategoryModule, ProductModule, HealthModule],
+    imports: [CategoryModule, ProductModule, HealthModule],
+    exports: [CategoryModule, ProductModule, HealthModule]
 })
 export class ManagementServiceModule {}

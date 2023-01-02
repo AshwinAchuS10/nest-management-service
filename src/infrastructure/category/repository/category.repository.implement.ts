@@ -5,13 +5,13 @@ import { Model } from 'mongoose';
 import { ICategorySchema } from '../entity/category.entity';
 
 export class CategoryRepositoryImplement implements CategoryRepository {
-  constructor(
-    @InjectModel('Category')
-    private readonly categoryModel: Model<ICategorySchema>
-  ) {}
+    constructor(
+        @InjectModel('Category')
+        private readonly categoryModel: Model<ICategorySchema>
+    ) {}
 
-  async save(category: Category | Category[]): Promise<any> {
-    const categoryModel = new this.categoryModel(category);
-    return await categoryModel.save();
-  }
+    async save(category: Category | Category[]): Promise<any> {
+        const categoryModel = new this.categoryModel(category);
+        return await categoryModel.save();
+    }
 }

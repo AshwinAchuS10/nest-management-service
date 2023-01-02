@@ -1,29 +1,29 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export type CategoryEssentialProperties = Readonly<
-  Required<{
-    name: string;
-    status: string;
-    ownerId: string;
-  }>
+    Required<{
+        name: string;
+        status: string;
+        ownerId: string;
+    }>
 >;
 
 export type CategoryOptionalProperties = Readonly<
-  Partial<{
-    tags: Array<string>;
-    description: string;
-  }>
+    Partial<{
+        tags: Array<string>;
+        description: string;
+    }>
 >;
 
 export type CategoryProperties = CategoryEssentialProperties & Required<CategoryOptionalProperties>;
 
 export interface Category {
-  commit: () => void;
+    commit: () => void;
 }
 
 export class CategoryImplement extends AggregateRoot implements Category {
-  constructor(properties: CategoryProperties) {
-    super();
-    Object.assign(this, properties);
-  }
+    constructor(properties: CategoryProperties) {
+        super();
+        Object.assign(this, properties);
+    }
 }

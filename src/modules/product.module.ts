@@ -11,14 +11,14 @@ const application: Array<any> = [];
 const domain: Array<any> = [];
 
 @Module({
-  imports: [
-    CqrsModule,
-    MongooseModule.forRootAsync({
-      useClass: MongooseConfigService,
-    }),
-    MongooseModule.forFeature([]),
-  ],
-  controllers: [],
-  providers: [Logger, ...infrastructure, ...application, ...domain],
+    imports: [
+        CqrsModule,
+        MongooseModule.forRootAsync({
+            useClass: MongooseConfigService
+        }),
+        MongooseModule.forFeature([])
+    ],
+    controllers: [],
+    providers: [Logger, ...infrastructure, ...application, ...domain]
 })
 export class ProductModule {}

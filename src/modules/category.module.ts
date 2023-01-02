@@ -13,14 +13,14 @@ import { CategoryRepositoryImplement } from 'infrastructure/category/repository/
 import { CategorySchema } from 'infrastructure/category/entity/category.entity';
 
 const infrastructure: Provider[] = [
-  {
-    provide: InjectionToken.CATEGORY_REPOSITORY,
-    useClass: CategoryRepositoryImplement,
-  },
-  {
-    provide: InjectionToken.CATEGORY_QUERY,
-    useClass: CategoryQueryImplement,
-  },
+    {
+        provide: InjectionToken.CATEGORY_REPOSITORY,
+        useClass: CategoryRepositoryImplement
+    },
+    {
+        provide: InjectionToken.CATEGORY_QUERY,
+        useClass: CategoryQueryImplement
+    }
 ];
 
 const application = [CreateCategoryHandler, FindCategoryHandler];
@@ -28,19 +28,19 @@ const application = [CreateCategoryHandler, FindCategoryHandler];
 const domain = [CategoryFactory];
 
 @Module({
-  imports: [
-    CqrsModule,
-    MongooseModule.forRootAsync({
-      useClass: MongooseConfigService,
-    }),
-    MongooseModule.forFeature([
-      {
-        name: 'Category',
-        schema: CategorySchema,
-      },
-    ]),
-  ],
-  controllers: [CategorysController],
-  providers: [Logger, ...infrastructure, ...application, ...domain],
+    imports: [
+        CqrsModule,
+        MongooseModule.forRootAsync({
+            useClass: MongooseConfigService
+        }),
+        MongooseModule.forFeature([
+            {
+                name: 'Category',
+                schema: CategorySchema
+            }
+        ])
+    ],
+    controllers: [CategorysController],
+    providers: [Logger, ...infrastructure, ...application, ...domain]
 })
 export class CategoryModule {}

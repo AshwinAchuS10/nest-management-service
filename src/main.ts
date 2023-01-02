@@ -11,22 +11,29 @@ import { ValidationPipe } from 'middlewares/validation.pipe';
 import { ManagementServiceModule } from 'modules/management.service.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(ManagementServiceModule, new FastifyAdapter());
+    const app = await NestFactory.create<NestFastifyApplication>(
+        ManagementServiceModule,
+        new FastifyAdapter()
+    );
 
-  const options = new DocumentBuilder().setTitle('Management Services API docs').addTag('categories').setVersion('1.0').build();
+    const options = new DocumentBuilder()
+        .setTitle('Management Services API docs')
+        .addTag('categories')
+        .setVersion('1.0')
+        .build();
 
-  app.useGlobalInterceptors(new LoggingInterceptor());
+    app.useGlobalInterceptors(new LoggingInterceptor());
 
-  app.setGlobalPrefix('v1/management-services');
+    app.setGlobalPrefix('v1/management-services');
 
-  app.useGlobalPipes(new ValidationPipe());
+    app.useGlobalPipes(new ValidationPipe());
 
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('api', app, document);
 
-  await logger.init();
+    await logger.init();
 
-  await app.listen(await new ConfigService().get('port'));
+    await app.listen(await new ConfigService().get('port'));
 }
 
 bootstrap();

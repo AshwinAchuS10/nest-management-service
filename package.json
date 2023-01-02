@@ -5,6 +5,7 @@
   "author": "Ashwin S",
   "scripts": {
     "build": "rimraf build && tsc -p tsconfig.build.json",
+    "format": "prettier --write '**/*.ts'",
     "start:dev": "tsc-watch --onSuccess \"node -r dotenv/config build/src/main.js dotenv_config_path=./.env\"",
     "start:test": "tsc-watch -p tsconfig.build.json --onSuccess \"node -r dotenv/config build/main.js dotenv_config_path=./.env.test\"",
     "start:prod": "npm run build && node -r dotenv/config build/src/main.js dotenv_config_path=./.env",
