@@ -1,4 +1,5 @@
-import bunyan from 'bunyan';
+import winston from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
 import { Logger } from '@myorganisationtbc/common';
 
 class LoggerService {
@@ -7,20 +8,22 @@ class LoggerService {
     public async init() {
         this.log = new Logger(
             await Logger.init(
-                `${process.env.SERVICE_NAME}`,
                 [
-                    {
-                        level: 'trace',
-                        stream: process.stdout
-                    },
-                    {
-                        level: 'trace',
-                        type: 'rotating-file',
-                        path: `${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDate()}-traces.log`,
-                        period: '1d'
-                    }
+                    new DailyRotateFile({
+                        filename: 'debug-log',
+                        level: 'debug',
+                        json: true,
+                        maxFiles: '7d',
+                        zippedArchive: true,
+                    }),
+                    new winston.transports.Console(),
                 ],
-                bunyan.stdSerializers
+                winston.format.combine(
+                    winston.format.timestamp(),
+                    winston.format.json()),
+                {
+                    service: process.env.SERVICE_NAME
+                }
             )
         );
     }

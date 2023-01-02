@@ -12,7 +12,7 @@ export class LoggingInterceptor implements NestInterceptor {
         const response = context.switchToHttp().getResponse<Response>();
         return next.handle().pipe(
             map((data) => {
-                logger.log.trace({
+                logger.log.info({
                     request: {
                         method: request.method,
                         url: request.url,

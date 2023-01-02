@@ -17,7 +17,7 @@ import { CategoryResponse } from 'domain/category/response/category.response';
 @ApiTags('categories')
 @Controller('categories')
 export class CategorysController {
-    constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) {}
+    constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) { }
 
     @Post('/')
     @ApiCreatedResponse({
@@ -25,7 +25,7 @@ export class CategorysController {
     })
     async createCategory(@Body() body: Category): Promise<CategoryResponse> {
         let result;
-        logger.log.trace('In Category Controller');
+        logger.log.debug("In Category Controller");
         try {
             const command = new CreateCategoryCommand(
                 body.name,
