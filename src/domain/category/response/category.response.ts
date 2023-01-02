@@ -1,6 +1,22 @@
-export interface ICategoryResponse {
-  status: number;
+import { ApiProperty } from '@nestjs/swagger';
+import { Category } from '../request/category.request';
+
+export class CategoryResponse {
+  @ApiProperty({ example: 'Category Created.' })
   message: string;
-  category: any | null;
-  errors: { [key: string]: any } | null;
+
+  @ApiProperty()
+  status: number;
+
+  @ApiProperty({
+    type: Category
+  })
+  data: {
+    category: Category
+  } | null;
+
+  @ApiProperty({ nullable: true })
+  errors?: Array<any> | null;
 }
+
+

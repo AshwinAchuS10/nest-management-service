@@ -1,12 +1,12 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCategoryCommand } from 'application/category/command/create.category.command';
 import { FindCategoryQuery } from 'application/category/query/find.category.query';
-import { CATEGORY_CREATE_FAILED, CATEGORY_CREATE_SUCCESS, CATEGORY_GET_SUCCESS, CATEGORY_GET_FAILED } from 'constants/category.messages';
-import { CreateCategory } from 'domain/category/request/category.request';
-import { ICategoryResponse } from 'domain/category/response/category.response';
+import { CATEGORY_CREATE_FAILED, CATEGORY_CREATE_SUCCESS, CATEGORY_GET_FAILED, CATEGORY_GET_SUCCESS } from 'constants/category.messages';
+import { Category } from 'domain/category/request/category.request';
+import { CategoryResponse } from 'domain/category/response/category.response';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -14,16 +14,19 @@ export class CategorysController {
   constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) { }
 
   @Post('/')
-  async createCategory(@Body() body: CreateCategory): Promise<ICategoryResponse> {
+  @ApiCreatedResponse({
+    type: CategoryResponse,
+  })
+  async createCategory(@Body() body: Category): Promise<CategoryResponse> {
     console.log('body: ', body);
     let result;
     try {
       const command = new CreateCategoryCommand(body.name, body.description, body.status, body.ownerId, body.tags);
-      let category = await this.commandBus.execute(command);
+      let category: Category = await this.commandBus.execute(command);
       result = {
         status: HttpStatus.CREATED,
         message: CATEGORY_CREATE_SUCCESS,
-        category: category,
+        data: { category },
         errors: null,
       };
       return result;
@@ -31,7 +34,7 @@ export class CategorysController {
       result = {
         status: HttpStatus.PRECONDITION_FAILED,
         message: CATEGORY_CREATE_FAILED,
-        category: null,
+        data: null,
         errors: [error?.message],
       };
       throw error;
@@ -39,21 +42,21 @@ export class CategorysController {
   }
 
   @Get('/')
-  async findCategoryById(@Body() body: any): Promise<ICategoryResponse> {
+  async findCategoryById(@Body() body: any): Promise<CategoryResponse> {
     let result;
     try {
-      let category = await this.queryBus.execute(new FindCategoryQuery(body._id));
+      let category: Category = await this.queryBus.execute(new FindCategoryQuery(body._id));
       result = {
         status: HttpStatus.OK,
         message: CATEGORY_GET_SUCCESS,
-        category: category,
+        data: { category },
         errors: null,
       };
     } catch (error: any) {
       result = {
         status: HttpStatus.PRECONDITION_FAILED,
         message: CATEGORY_GET_FAILED,
-        category: null,
+        data: null,
         errors: [error?.message],
       };
     }
