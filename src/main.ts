@@ -1,31 +1,35 @@
+import { NestFactory } from '@nestjs/core';
+import {
+  FastifyAdapter,
+  NestFastifyApplication
+} from '@nestjs/platform-fastify';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import 'module-alias/register';
 import 'reflect-metadata';
-import { NestFactory } from '@nestjs/core';
-import { TcpOptions, Transport } from '@nestjs/microservices';
-import { ConfigService } from './configuration/config.service';
-import { ValidationPipe } from '@nestjs/common';
-import { RpcExceptionFilter } from './middlewares/rpc.exception';
+import { LoggingInterceptor } from './middlewares/logging.interceptor';
+import { ConfigService } from 'configuration/config.service';
 import { ManagementServiceModule } from './modules/management.service.module';
 
 async function bootstrap() {
-  let configService = new ConfigService();
-  const app = await NestFactory.createMicroservice(ManagementServiceModule, {
-    transport: Transport.TCP,
-    options: {
-      host: configService.get('host'),
-
-      port: configService.get('port'),
-    },
-  } as unknown as TcpOptions);
-
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-    })
+  const app = await NestFactory.create<NestFastifyApplication>(
+    ManagementServiceModule,
+    new FastifyAdapter()
   );
 
-  app.useGlobalFilters(new RpcExceptionFilter());
-  await app.listen();
+  const options = new DocumentBuilder()
+    .setTitle('API docs')
+    .addTag('categories')
+    .setVersion('1.0')
+    .build();
+
+  app.useGlobalInterceptors(new LoggingInterceptor());
+
+  app.setGlobalPrefix('v1/management-services');
+
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api', app, document);
+
+  await app.listen(await new ConfigService().get('port'));
 }
 
 bootstrap();

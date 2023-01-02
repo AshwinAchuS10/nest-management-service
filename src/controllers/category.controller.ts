@@ -1,18 +1,20 @@
-import { Body, Controller, HttpStatus, Param } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 import { MessagePattern } from '@nestjs/microservices';
+import { ApiTags } from '@nestjs/swagger';
 import { CreateCategoryCommand } from 'application/category/command/create.category.command';
 import { FindCategoryQuery } from 'application/category/query/find.category.query';
 import { CATEGORY_CREATE_FAILED, CATEGORY_CREATE_SUCCESS, CATEGORY_GET_SUCCESS, CATEGORY_GET_FAILED } from 'constants/category.messages';
 import { CreateCategory } from 'domain/category/request/category.request';
 import { ICategoryResponse } from 'domain/category/response/category.response';
 
-@Controller()
+@ApiTags('categories')
+@Controller('categories')
 export class CategorysController {
-  constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) {}
+  constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) { }
 
-  @MessagePattern('category_create')
+  @Post('/')
   async createCategory(@Body() body: CreateCategory): Promise<ICategoryResponse> {
     console.log('body: ', body);
     let result;
@@ -37,7 +39,7 @@ export class CategorysController {
     }
   }
 
-  @MessagePattern('category_get_by_id')
+  @Get('/')
   async findCategoryById(@Body() body: any): Promise<ICategoryResponse> {
     let result;
     try {
