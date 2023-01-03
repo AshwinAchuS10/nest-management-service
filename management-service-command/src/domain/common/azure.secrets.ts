@@ -1,5 +1,6 @@
 export interface IAzureUserSecrets {
     database: IDatabase;
+    applicationInsight: IApplicationInsight;
 }
 
 export interface IDatabase {
@@ -8,4 +9,8 @@ export interface IDatabase {
     username: string;
     password: string;
     name: string;
+}
+
+export interface IApplicationInsight {
+    key: string;
 }
