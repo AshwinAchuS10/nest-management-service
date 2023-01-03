@@ -6,8 +6,8 @@ export class ConfigService {
 
     constructor() {
         this.envConfig = {
-            port: process.env.MANAGEMENT_SERVICE_READ_PORT,
-            host: process.env.MANAGEMENT_SERVICE_READ_HOST
+            port: process.env.MANAGEMENT_SERVICE_QUERY_PORT,
+            host: process.env.MANAGEMENT_SERVICE_QUERY_HOST
         };
     }
 

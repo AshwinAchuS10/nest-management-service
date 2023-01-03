@@ -1,16 +1,16 @@
 version: '3.4'
 
 services:
-  management-service-write:
-    build: ./management-service-write
+  management-service-command:
+    build: ./management-service-command
 
     ports:
       - "8003:8003"
 
     restart: always
 
-  management-service-read:
-    build: ./management-service-read
+  management-service-query:
+    build: ./management-service-query
 
     ports:
       - "8004:8004"

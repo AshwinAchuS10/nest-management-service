@@ -19,9 +19,9 @@ npm install -g ts-node
 
 ## Features
 
-***management-service-write*** serves only write operations to the database via command handlers in [CQRS pattern](https://docs.nestjs.com/recipes/cqrs).
+***management-service-command*** serves only write operations to the database via command handlers in [CQRS pattern](https://docs.nestjs.com/recipes/cqrs).
 
-***management-service-read*** serves only read operations to the database via query handlers in [CQRS pattern](https://docs.nestjs.com/recipes/cqrs).
+***management-service-query*** serves only read operations to the database via query handlers in [CQRS pattern](https://docs.nestjs.com/recipes/cqrs).
 
 ##### Folders
 ***application***     - contains command and handlers of differnt modules of the service.
@@ -40,13 +40,13 @@ npm install -g ts-node
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-cd management-service-write
+cd management-service-command
 npm i
 npm run start:dev
 ```
 Browse Swagger via http://localhost:8003/api
 ```sh
-cd management-service-read
+cd management-service-query
 npm i
 npm run start:dev
 ```
@@ -55,20 +55,20 @@ Browse Swagger via http://localhost:8004/api
 ---
 ## Running in Docker
 
-#####  Write Service
+#####  Command Service
 ---
 ```sh
-cd management-service-write
-docker build -t management-service-write .
-docker run -d -p 8003:8003 management-service-write
+cd management-service-command
+docker build -t management-service-command .
+docker run -d -p 8003:8003 management-service-command
 ```
 
-##### Read Service
+##### Query Service
 ---
 ```sh
-cd management-service-read
-docker build -t management-service-read .
-docker run -d -p 8004:8004 management-service-read
+cd management-service-query
+docker build -t management-service-query .
+docker run -d -p 8004:8004 management-service-query
 ```
 
 ## Running via Docker Compose
