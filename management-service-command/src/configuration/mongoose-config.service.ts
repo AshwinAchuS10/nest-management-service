@@ -9,10 +9,9 @@ export class MongooseConfigService implements MongooseOptionsFactory {
         let secrets: IAzureUserSecrets = keyvault.data;
         return {
             uri:
-                process.env.NODE_ENV == 'production' ?
-                    `mongodb+srv://${secrets.database.username}:${secrets.database.password}@${secrets.database.host}/${secrets.database.name}`
-                    :
-                    `mongodb://${secrets.database.username}:${secrets.database.password}@${secrets.database.host}/${secrets.database.name}`
+                process.env.NODE_ENV == 'production'
+                    ? `mongodb+srv://${secrets.database.username}:${secrets.database.password}@${secrets.database.host}/${secrets.database.name}`
+                    : `mongodb://${secrets.database.username}:${secrets.database.password}@${secrets.database.host}/${secrets.database.name}`
         };
     }
 }
