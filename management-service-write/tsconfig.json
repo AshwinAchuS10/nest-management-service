@@ -1,0 +1,76 @@
+{
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "commonjs",
+    "sourceMap": true,
+    "inlineSources": true,
+    "skipLibCheck": true,
+    "sourceRoot": "/",
+    "rootDir": "./",
+    "outDir": "./build",
+    "removeComments": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    // "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "resolveJsonModule": true,
+    "paths": {
+      "application/*": [
+        "./src/application/*"
+      ],
+      "domain/*": [
+        "./src/domain/*"
+      ],
+      "interface/*": [
+        "./src/interface/*"
+      ],
+      "libraries/*": [
+        "./src/libraries/*"
+      ],
+      "modules/*": [
+        "src/modules/*"
+      ],
+      "controllers/*": [
+        "./src/controllers/*"
+      ],
+      "infrastructure/*": [
+        "./src/infrastructure/*"
+      ],
+      "configuration/*": [
+        "./src/configuration/*"
+      ],
+      "common/*": [
+        "./src/common/*"
+      ],
+      "constant/*": [
+        "./src/constant/*"
+      ],
+      "resources/*": [
+        "./src/resources/*"
+      ],
+      "middlewares/*": [
+        "./src/middlewares/*"
+      ],
+    },
+    "typeRoots": [
+      "node_modules/@types",
+      "typings/*"
+    ],
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "**/*"
+  ]
+}
