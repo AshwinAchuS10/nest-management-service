@@ -16,6 +16,7 @@ If the installation was successful, you should be able to run the following comm
 ```sh
 npm install -g ts-node
 ```
+---
 
 ## Features
 
@@ -23,17 +24,29 @@ npm install -g ts-node
 
 ***management-service-query*** serves only read operations to the database via query handlers in [CQRS pattern](https://docs.nestjs.com/recipes/cqrs).
 
-##### Folders
+--- 
+
+### Folders
+
 ***application***     - contains command and handlers of differnt modules of the service.
+
 ***configuration***   - contains initializers such as configurations for secrets, database connection, loggers etc.
+
 ***constant***        - contains application constant variables and messages.
+
 ***controllers***     - rest mapping for different resources of the serivce.
+
 ***domain***          - contains differrent request, response domain classes, factory methods, repository interfaces etc.
+
 ***infrastructure***  - contains entities of different modules, repository implementations etc.
+
 ***libraries***       - will be removed, will common library npm package eventually.
+
 ***middlewares***     - contains different middleware classes such as exception filtering, logging intercepting, validations etc.
+
 ***modules***         - contains differnt modules of the service
 
+---
 
 ## Installation
 
