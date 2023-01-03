@@ -4,17 +4,14 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCategoryCommand } from 'application/category/command/create.category.command';
 import logger from 'configuration/logger.service';
-import {
-    CATEGORY_CREATE_FAILED,
-    CATEGORY_CREATE_SUCCESS
-} from 'constant/category.messages';
+import { CATEGORY_CREATE_FAILED, CATEGORY_CREATE_SUCCESS } from 'constant/category.messages';
 import { Category } from 'domain/category/request/category.request';
 import { CategoryResponse } from 'domain/category/response/category.response';
 
 @ApiTags('categories')
 @Controller('categories')
 export class CategorysController {
-    constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) { }
+    constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) {}
 
     @Post('/')
     @ApiCreatedResponse({

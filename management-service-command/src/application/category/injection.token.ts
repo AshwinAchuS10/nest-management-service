@@ -1,3 +1,3 @@
 export enum InjectionToken {
-    CATEGORY_REPOSITORY = 'CategoryRepository',
+    CATEGORY_REPOSITORY = 'CategoryRepository'
 }

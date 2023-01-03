@@ -14,7 +14,7 @@ const infrastructure: Provider[] = [
     {
         provide: InjectionToken.CATEGORY_REPOSITORY,
         useClass: CategoryRepositoryImplement
-    },
+    }
 ];
 
 const application = [CreateCategoryHandler];
@@ -37,4 +37,4 @@ const domain = [CategoryFactory];
     controllers: [CategorysController],
     providers: [Logger, ...infrastructure, ...application, ...domain]
 })
-export class CategoryModule { }
+export class CategoryModule {}

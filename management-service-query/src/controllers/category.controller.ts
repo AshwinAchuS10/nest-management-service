@@ -3,17 +3,14 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 import { ApiTags } from '@nestjs/swagger';
 import { FindCategoryQuery } from 'application/category/query/find.category.query';
-import {
-    CATEGORY_GET_FAILED,
-    CATEGORY_GET_SUCCESS
-} from 'constant/category.messages';
+import { CATEGORY_GET_FAILED, CATEGORY_GET_SUCCESS } from 'constant/category.messages';
 import { Category } from 'domain/category/request/category.request';
 import { CategoryResponse } from 'domain/category/response/category.response';
 
 @ApiTags('categories')
 @Controller('categories')
 export class CategorysController {
-    constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) { }
+    constructor(readonly commandBus: CommandBus, readonly queryBus: QueryBus) {}
 
     @Get('/')
     async findCategoryById(@Body() body: any): Promise<CategoryResponse> {

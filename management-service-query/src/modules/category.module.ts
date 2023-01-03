@@ -37,4 +37,4 @@ const domain = [CategoryFactory];
     controllers: [CategorysController],
     providers: [Logger, ...infrastructure, ...application, ...domain]
 })
-export class CategoryModule { }
+export class CategoryModule {}

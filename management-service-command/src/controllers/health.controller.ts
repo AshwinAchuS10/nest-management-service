@@ -6,7 +6,7 @@ import { HealthCheckResponse } from 'domain/common/health.check';
 @ApiTags('health')
 @Controller('health')
 export class HealthController {
-    constructor(private db: MongooseHealthIndicator) { }
+    constructor(private db: MongooseHealthIndicator) {}
 
     @Get('/')
     @ApiResponse({
@@ -21,8 +21,9 @@ export class HealthController {
                 .catch((error) => error);
             return {
                 database: {
-                    status: `${DATABASE_NAME}-${databasePingResponse[DATABASE_NAME]?.status == 'up' ? 'IS_ALIVE' : 'IS_DOWN'
-                        }`
+                    status: `${DATABASE_NAME}-${
+                        databasePingResponse[DATABASE_NAME]?.status == 'up' ? 'IS_ALIVE' : 'IS_DOWN'
+                    }`
                 },
                 service: {
                     status: `MANAGEMENT_SERVICE_WRITE-IS_ALIVE`

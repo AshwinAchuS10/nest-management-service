@@ -18,7 +18,6 @@ export class ConfigService {
     async getSecrets(): Promise<any> {
         let credential: any = new DefaultAzureCredential();
         const secrets: IAzureUserSecrets = await AzureKeyVault.getKeyVaultSecret(
-
             credential,
             `${process.env.AZURE_SECRETS_URL}`
         );

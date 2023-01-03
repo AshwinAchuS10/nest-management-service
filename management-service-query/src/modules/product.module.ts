@@ -21,4 +21,4 @@ const domain: Array<any> = [];
     controllers: [],
     providers: [Logger, ...infrastructure, ...application, ...domain]
 })
-export class ProductModule { }
+export class ProductModule {}
