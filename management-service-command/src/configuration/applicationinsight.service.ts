@@ -3,7 +3,6 @@ import keyvault from 'configuration/keyvault.service';
 import { IAzureUserSecrets } from 'domain/common/azure.secrets';
 
 class ApplicationInsightService {
-
     public async init() {
         let secrets: IAzureUserSecrets = keyvault.data;
         appInsights

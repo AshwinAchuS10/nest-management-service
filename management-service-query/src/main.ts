@@ -14,7 +14,6 @@ import keyvault from 'configuration/keyvault.service';
 import applicationInsight from 'configuration/applicationinsight.service';
 
 async function bootstrap() {
-
     await keyvault.init();
 
     await applicationInsight.init();
@@ -29,7 +28,7 @@ async function bootstrap() {
     app.useGlobalInterceptors(new LoggingInterceptor());
 
     const options = new DocumentBuilder()
-        .setTitle('Management Services API docs')
+        .setTitle('Management Services Query API docs')
         .setVersion('1.0')
         .build();
 

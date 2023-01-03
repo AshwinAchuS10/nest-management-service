@@ -10,8 +10,7 @@ export class MongooseConfigService implements MongooseOptionsFactory {
         return {
             // should be normalised connection url with creds attached
             // uri: `mongodb://${secrets.database.username}:${secrets.database.password}@${secrets.database.host}/${secrets.database.name}`
-            uri:
-                process.env.NODE_ENV == 'production' ?
+            uri: process.env.NODE_ENV == 'production' ?
                     `mongodb+srv://${secrets.database.username}:${secrets.database.password}@${secrets.database.host}/${secrets.database.name}`
                     :
                     // `mongodb://${secrets.database.host}/${secrets.database.name}`
